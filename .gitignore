@@ -1,0 +1,24 @@
+# Bỏ qua thư mục chứa mô hình lớn
+models/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Môi trường ảo
+.venv/
+env/
+venv/
+
+# Notebook checkpoints
+*.ipynb_checkpoints
+
+# Streamlit logs/config
+.streamlit/
+*.log
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db

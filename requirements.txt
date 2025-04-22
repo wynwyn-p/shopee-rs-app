@@ -1,0 +1,13 @@
+streamlit
+pandas
+numpy>=1.25.2
+matplotlib
+seaborn
+scikit-learn
+gensim>=4.3.3
+scikit-surprise
+plotly
+pyarrow
+gdown
+joblib
+streamlit-option-menu
