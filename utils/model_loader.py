@@ -6,17 +6,17 @@ import pandas as pd
 from gensim import corpora, models, similarities
 from gensim.corpora import MmCorpus
 import streamlit as st
-# from utils.download_models import download_models
+from utils.download_models import download_models
 
 @st.cache_resource(show_spinner="📦 Đang tải mô hình và dữ liệu...")  # Cache để tránh tải lại
 def load_all_models():
-    # ✅ Tải mô hình từ Google Drive nếu chưa có
+    # Tải mô hình từ Google Drive nếu chưa có
     download_models()
 
-    # 📁 Đường dẫn tới thư mục models
+    # Đường dẫn tới thư mục models
     base_path = os.path.join(os.path.dirname(__file__), "..", "models")
 
-    # 🔁 Load các file mô hình đã lưu
+    # Load các file mô hình đã lưu
     df_final = pd.read_parquet(os.path.join(base_path, 'df_final_new.parquet'))
     dictionary = corpora.Dictionary.load(os.path.join(base_path, 'dictionary_tokenized.dict'))
     tfidf_model = models.TfidfModel.load(os.path.join(base_path, 'tfidf_model_gensim.pkl'))
