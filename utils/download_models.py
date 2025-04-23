@@ -12,11 +12,11 @@ def download_models(model_dir="models"):
 
     # Danh sách các file cần tải và ID tương ứng từ Google Drive
     file_links = {
-        "df_final_new.parquet": "1rEJ8_TfUmxCHpV6E3wPYdYQwbWjj2Qxh",
-        "baseline_only_model.pkl": "1Br2V6iE7UYyie9aZQXa0EZwH1-6OTo1F",
-        "dictionary_tokenized.dict": "1Y2ZcSeTfWUJphW1ScGpSpPyecbJe8G9K",
-        "tfidf_model_gensim.pkl": "1Bv2cRTAAKw3n5Rg5ErXL3TKD9vxUYquD",
-        "gensim_index_merged": "1-jRVyfG2maGrTWRSHeoEiCDMMPiHz1db",  # File chính .0/.1/.2 sẽ kèm theo
+        "df_final_new.parquet": "1qNhT-S5gsM5FSWWxiiIrHKXUkfha7dej",
+        "baseline_only_model.pkl": "1nNnUdN0QQyPy1xVp-jCy3W5RAevIXtpp",
+        "dictionary_tokenized.dict": "18yUwrnKNN6LefMRQwP6ObuCUAoLWcqqL",
+        "tfidf_model_gensim.pkl": "1xHsxxTvh6wZWpphd1X5268gkr4giRQ1s",
+        "gensim_index_merged": "1IwcQTNrO8hHsXCna8dDzLjPp2PPIH9Qw",  # File chính .0/.1/.2 sẽ kèm theo
     }
 
     print("📥 Bắt đầu kiểm tra và tải từng file mô hình...")
