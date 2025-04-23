@@ -1,24 +1,40 @@
-# Bỏ qua thư mục chứa mô hình lớn
-models/
-
-# Python cache
+# ===============================
+# 🐍 Python
+# ===============================
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Môi trường ảo
-.venv/
-env/
-venv/
-
-# Notebook checkpoints
-*.ipynb_checkpoints
-
-# Streamlit logs/config
-.streamlit/
+*.py[cod]
 *.log
+*.ipynb_checkpoints
+*.pyc
 
-# Hệ điều hành
+# ===============================
+# 📦 Models & Data (Google Drive only)
+# ===============================
+models/
+!models/.gitkeep  # giữ thư mục models để không lỗi khi clone
+*.pkl
+*.parquet
+*.dict
+*.index
+
+# ===============================
+# 🚀 Streamlit & Cache
+# ===============================
+.streamlit/
+.cache/
+
+# ===============================
+# ⚙️ Môi trường ảo & hệ điều hành
+# ===============================
+.env
+.env.*
+venv/
+.venv/
 .DS_Store
 Thumbs.db
+
+# ===============================
+# 🧠 IDE (VSCode / PyCharm)
+# ===============================
+.vscode/
+.idea/
