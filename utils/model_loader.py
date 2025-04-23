@@ -6,8 +6,7 @@ import pandas as pd
 from gensim import corpora, models, similarities
 from gensim.corpora import MmCorpus
 import streamlit as st
-
-from utils.download_models import download_models
+# from utils.download_models import download_models
 
 @st.cache_resource(show_spinner="📦 Đang tải mô hình và dữ liệu...")  # Cache để tránh tải lại
 def load_all_models():
