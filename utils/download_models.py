@@ -3,14 +3,8 @@ import gdown
 import time
 
 def download_models(model_dir="models"):
-    """
-    Tải toàn bộ mô hình cần thiết từ Google Drive, bao gồm:
-    - Dữ liệu parquet, dictionary, tfidf, mô hình BaselineOnly
-    - File gensim_index_merged chính và 30 phần từ .0 đến .29
-    """
     os.makedirs(model_dir, exist_ok=True)
 
-    # Các file đơn
     file_links = {
         "df_final_new.parquet": "1qNhT-S5gsM5FSWWxiiIrHKXUkfha7dej",   
         "baseline_only_model.pkl": "1nNnUdN0QQyPy1xVp-jCy3W5RAevIXtpp",
@@ -19,7 +13,6 @@ def download_models(model_dir="models"):
         "gensim_index_merged": "1IwcQTNrO8hHsXCna8dDzLjPp2PPIH9Qw"
     }
 
-    # ID các phần gensim_index_merged.0 → .29
     gensim_index_ids = [
         "1W8ZbaHl4D4IpCa5XT4h46k__ykyIETTR", "1WO1ES2uWzLePiqNbAkwcOEucaAz1V3fQ",
         "1SyfYidyh7vwlPDAin-rOai9vzVAeBbzS", "1Ea3z-kEfsGmksjZisb3M9LJm80BZ_FBP",
@@ -39,35 +32,34 @@ def download_models(model_dir="models"):
         "1Jli3OY9hEO1nsBHvH7Quw5vZ9yigawcO"
     ]
 
-    gensim_index_parts = {
-        f"gensim_index_merged.{i}": file_id
-        for i, file_id in enumerate(gensim_index_ids)
-    }
+    gensim_index_parts = {f"gensim_index_merged.{i}": file_id for i, file_id in enumerate(gensim_index_ids)}
 
-    print("📥 Bắt đầu kiểm tra và tải từng file mô hình...\n")
+    print("📥 Bắt đầu tải các file...\n")
 
-    # Tải các file đơn
-    for filename, file_id in file_links.items():
-        save_path = os.path.join(model_dir, filename)
-        if not os.path.exists(save_path):
-            print(f"🔽 Đang tải {filename}...")
-            url = f"https://drive.google.com/uc?id={file_id}"
+    def safe_download(name, file_id):
+        save_path = os.path.join(model_dir, name)
+        url = f"https://drive.google.com/uc?id={file_id}"
+        if os.path.exists(save_path):
+            print(f"✅ {name} đã tồn tại, bỏ qua.")
+            return
+
+        print(f"🔽 Đang tải {name} từ {url}")
+        try:
             gdown.download(url, save_path, quiet=False)
-        else:
-            print(f"✅ Đã có {filename}, bỏ qua.")
+        except Exception as e:
+            print(f"❌ Không thể tải {name} — Kiểm tra link: {url}")
+            print(f"   → Lỗi: {e}\n")
 
-    # Tải các phần .0 đến .29
-    for filename, file_id in gensim_index_parts.items():
-        save_path = os.path.join(model_dir, filename)
-        if not os.path.exists(save_path):
-            print(f"🔽 Đang tải {filename}...")
-            url = f"https://drive.google.com/uc?id={file_id}"
-            gdown.download(url, save_path, quiet=False)
-        else:
-            print(f"✅ Đã có {filename}, bỏ qua.")
+    # Tải từng file đơn
+    for fname, fid in file_links.items():
+        safe_download(fname, fid)
 
-    print("\n✅ Toàn bộ file đã được kiểm tra và tải xong.")
-    print("📂 Danh sách file hiện có trong thư mục models/:")
+    # Tải từng phần của gensim_index_merged
+    for fname, fid in gensim_index_parts.items():
+        safe_download(fname, fid)
+
+    print("\n📦 Toàn bộ file đã được kiểm tra.")
+    print("📂 File hiện có trong thư mục models/:")
     for f in sorted(os.listdir(model_dir)):
         print("  -", f)
 
