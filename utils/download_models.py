@@ -1,4 +1,5 @@
 import os
+import time
 import gdown
 
 def download_models(folder_url="https://drive.google.com/drive/u/1/folders/19qxil5Adf9YlQYlnetbDsRW8QsThNvZj", model_dir="models"):
@@ -19,21 +20,26 @@ def download_models(folder_url="https://drive.google.com/drive/u/1/folders/19qxi
     os.makedirs(model_dir, exist_ok=True)
     
     try:
-        gdown.download_folder(
-            url=folder_url,
-            output=model_dir,
-            quiet=False,
-            use_cookies=False
-        )
-        print("\n✅ Tải thành công toàn bộ mô hình!")
+    gdown.download_folder(
+        url=folder_url,
+        output=model_dir,
+        quiet=False,
+        use_cookies=False
+    )
+    print("\n✅ Tải thành công toàn bộ mô hình!")
+    
+    # 🕒 Đợi một chút cho hệ thống ổn định (tránh crash Streamlit khi khởi động lại)
+    print("🕒 Đợi 3 giây để đảm bảo file được ghi đầy đủ...")
+    time.sleep(3)
 
-        # In danh sách file sau khi tải xong
-        print("📦 Danh sách file đã tải về:")
-        for file in os.listdir(model_dir):
-            print("  -", file)
+    # In danh sách file sau khi tải
+    print("📦 Danh sách file đã tải về:")
+    for file in os.listdir(model_dir):
+        print("  -", file)
 
     except Exception as e:
         print(f"❌ Lỗi khi tải mô hình: {e}")
 
 if __name__ == "__main__":
     download_models()
+    
