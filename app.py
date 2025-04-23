@@ -22,8 +22,7 @@ with st.spinner("📁 Đang tải dữ liệu và mô hình..."):
     stop_words = load_stop_words("utils/vietnamese-stopwords.txt")
 
     # Load toàn bộ mô hình
-    MODEL_DIR = "models"
-    dictionary, tfidf_model, similarity_index, df_final, baseline_model = load_all_models(MODEL_DIR)
+    dictionary, tfidf_model, similarity_index, df_final, baseline_model = load_all_models()
 
 # ========================== Điều hướng theo menu ==========================
 selected = st.session_state.get("selected_page", "Introduction")
