@@ -2,7 +2,7 @@ import os
 import time
 import gdown
 
-def download_models(folder_url="https://drive.google.com/drive/u/1/folders/19qxil5Adf9YlQYlnetbDsRW8QsThNvZj", model_dir="models"):
+def download_models(folder_url="https://drive.google.com/drive/u/0/folders/1mB2wQqf1OspB8_wulXMaoxd_2W0fRpdj", model_dir="models"):
     """
     Tải toàn bộ mô hình từ Google Drive folder về thư mục models/
     và in danh sách các file đã tải.
@@ -18,7 +18,7 @@ def download_models(folder_url="https://drive.google.com/drive/u/1/folders/19qxi
 
     print("📥 Đang tải toàn bộ mô hình từ Google Drive...")
     os.makedirs(model_dir, exist_ok=True)
-    
+
     try:
         gdown.download_folder(
             url=folder_url,
@@ -26,13 +26,11 @@ def download_models(folder_url="https://drive.google.com/drive/u/1/folders/19qxi
             quiet=False,
             use_cookies=False
         )
+
         print("\n✅ Tải thành công toàn bộ mô hình!")
+        print("🕒 Đợi 5 giây để đảm bảo file được ghi đầy đủ...")
+        time.sleep(5)
 
-        # 🕒 Đợi một chút cho hệ thống ổn định (tránh crash Streamlit khi khởi động lại)
-        print("🕒 Đợi 3 giây để đảm bảo file được ghi đầy đủ...")
-        time.sleep(3)
-
-        # In danh sách file sau khi tải
         print("📦 Danh sách file đã tải về:")
         for file in os.listdir(model_dir):
             print("  -", file)
